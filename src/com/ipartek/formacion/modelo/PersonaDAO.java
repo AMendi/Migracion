@@ -1,5 +1,6 @@
 package com.ipartek.formacion.modelo;
 
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,16 @@ import java.util.List;
 import com.ipartek.formacion.pojo.Persona;
 
 public class PersonaDAO implements Persistable<Persona> {
-
+	private DbConnection conn;
+	
+	public PersonaDAO(){
+		conn = new DbConnection();
+	}
+	
+	public void closeConn(){
+		conn.desconectar();
+	}
+	
 	@Override
 	public List<Persona> getAll() throws SQLException  {
 		ArrayList<Persona> lista = new ArrayList<Persona>();
@@ -100,7 +110,7 @@ public class PersonaDAO implements Persistable<Persona> {
 	@Override
 	public int insert(Persona p ) throws SQLException {
 		int resul = -1;
-		DbConnection conn = new DbConnection();
+		//DbConnection conn = new DbConnection();
 		String sql ="INSERT INTO `persona` (`nombre`,`dni`,`observaciones`,`email`) VALUES ( ?,?,?,? );";
 		PreparedStatement pst = conn.getConnection().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS );
 		pst.setString(1, p.getNombre() );
@@ -119,7 +129,7 @@ public class PersonaDAO implements Persistable<Persona> {
 			
 		}
 		pst.close();
-    	conn.desconectar();
+    	//conn.desconectar();
 		return resul;
 	}
 	

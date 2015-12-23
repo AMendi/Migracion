@@ -20,13 +20,12 @@ public class Persona {
 	}
 	
 	
-////////////////////////////////////
-	public Persona(String nombre, String dni, String fecha, String observaciones, String email) {
+	public Persona(String nombre, String dni, String observaciones, String email) {
 		super();
 		this.id = -1;
 		this.nombre = nombre;
 		this.dni = dni;
-		this.fecha = fecha;
+		this.fecha = null;
 		this.observaciones = observaciones;
 		this.email = email;
 	}
